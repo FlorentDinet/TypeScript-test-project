@@ -1,4 +1,5 @@
-
+import { Commentaire } from './Commentaire';
+import { Produit } from './Produit';
 /**
  * name
  */
@@ -13,8 +14,8 @@ export class Humain {
     private poids: string;
     private langue: string;
     private niveauLangue: number;
-    private sms: Array<string>;
-    private panier: Array<Object> = [];
+    private sms: Array < string > ;
+    private panier: Array < Object > = [];
 
     // Attributs statiques
     private static compteur = 0;
@@ -25,17 +26,16 @@ export class Humain {
 
     // Constructeur
     constructor(
-        prenom : string = 'John',
-        nom : string = 'Doe',
-        couleurYeux : string = 'vert',
-        couleurCheveux : string = 'brun',
-        taille : string = '1.60m',
-        poids : string = '65kg',
-        langue : string = 'Français',
+        prenom: string = 'John',
+        nom: string = 'Doe',
+        couleurYeux: string = 'vert',
+        couleurCheveux: string = 'brun',
+        taille: string = '1.60m',
+        poids: string = '65kg',
+        langue: string = 'Français',
         niveauLangue = 1,
-        sms : Array<string> = []
-    )
-    {
+        sms: Array < string > = []
+    ) {
         this.prenom = prenom;
         this.nom = nom;
         this.couleurYeux = couleurYeux;
@@ -46,33 +46,33 @@ export class Humain {
         this.niveauLangue = niveauLangue;
         this.sms = sms;
 
-        Humain.compteur ++;
+        Humain.compteur++;
     }
-    
+
     /*
         Getter Prénom
     */
-    getPrenom():string{
-      return this.prenom;
-    }
-    /*
-        Setter Prénom
-    */
-    setPrenom(prenom: string){
-      this.prenom = prenom;
+    getPrenom(): string {
+            return this.prenom;
+        }
+        /*
+            Setter Prénom
+        */
+    setPrenom(prenom: string) {
+        this.prenom = prenom;
     }
 
     /*
         Getter Nom
     */
-    getNom():string{
-      return this.nom;
-    }
-    /*
-        Setter Nom
-    */
-    setNom(nom : string){
-      this.nom = nom;
+    getNom(): string {
+            return this.nom;
+        }
+        /*
+            Setter Nom
+        */
+    setNom(nom: string) {
+        this.nom = nom;
     }
 
     /*
@@ -80,183 +80,287 @@ export class Humain {
         Retourne la couleur des yeux de mon objet courant
     */
     getCouleurYeux() {
-        return this.couleurYeux;
-    }
-    /*
-    *   Setter
-        Modifier la couleur des yeux de mon objet courant
-    */
+            return this.couleurYeux;
+        }
+        /*
+        *   Setter
+            Modifier la couleur des yeux de mon objet courant
+        */
     setCouleurYeux(couleur: string) {
-        this.couleurYeux = couleur;
-    }
-    /*
-    *   Getter langue
-        Retourne la couleur des yeux de mon objet courant
-    */
+            this.couleurYeux = couleur;
+        }
+        /*
+        *   Getter langue
+            Retourne la couleur des yeux de mon objet courant
+        */
     getLangue() {
-        return this.langue;
-    }
-    /*
-    *   Setter langue
-        Modifier la couleur des yeux de mon objet courant
-    */
+            return this.langue;
+        }
+        /*
+        *   Setter langue
+            Modifier la couleur des yeux de mon objet courant
+        */
     setLangue(langue: string) {
-        this.langue = langue;
-    }
-    /*
-        Getter couleurCheveux
-    */
-    
+            this.langue = langue;
+        }
+        /*
+            Getter couleurCheveux
+        */
+
     getCouleurCheveux() {
-       return this.couleurCheveux;
-    }
-    /*
-        Setter couleurCheveux
-    */
+            return this.couleurCheveux;
+        }
+        /*
+            Setter couleurCheveux
+        */
     setCouleurCheveux(couleur: string) {
-        this.couleurCheveux = couleur;
+            this.couleurCheveux = couleur;
+        }
+        /*
+            Getter niveauLangue
+        */
+    getniveauLangue() {
+            return this.niveauLangue;
+        }
+        /*
+            Set niveauLangue
+        */
+    setniveauLangue() {
+        this.niveauLangue++;
     }
-    /*
-        Getter niveauLangue
-    */
-    getniveauLangue(){
-      return this.niveauLangue;
-    }
-    /*
-        Set niveauLangue
-    */
-    setniveauLangue(){
-      this.niveauLangue++;
-    }
-    
+
     /*
         Get panier
     */
-    getPanier(){
-      console.log(this.panier);
+    getPanier() {
+        console.log(this.panier);
     }
 
     /*
         Ecrire sms
     */
-    public ecrireSMS = function(sms: Array<string>){
-        if(sms) {
-           /* sms.forEach(element => {
+    public ecrireSMS = function (sms: Array < string > ) {
+        if (sms) {
+
+            sms.forEach(element => {
+                /*                console.log("le sms ecrit", element);*/
+
                 this.sms.push(element);
-            });*/
-            for(let sms of this.sms){
-                this.sms.push(sms);
-            }
+            });
+            /*
+                        for(let sms of this.sms){
+                        console.log("coucou");
+                            console.log("le sms ecrit",sms);
+                            console.log("le total de sms",this.sms);
+                            
+                            this.sms.push(sms);
+                        }*/
         }
     }
 
     /*
         Lire sms
     */
-    public lireSMS = function(){
+    public lireSMS = function () {
+        let listSms = '';
         for (let i in this.sms) {
-            return 'Sms N°'+ i + " : " + this.sms[i];
+            listSms += `Sms N°${i} : ${this.sms[i]}\n`;
         }
+        return listSms;
     }
 
     /*
         Supprimer sms
     */
-    public supprimerSMS = function(which:Array<string>=null){
-         if (typeof which !== 'Array') // S'il ne s'agit pas d'un tableau.
-            {
+    public supprimerSMS = function (which: Array < string >= null) {
+        if (typeof which !== 'Array') // S'il ne s'agit pas d'un tableau.
+        {
             alert('On attend un tableau d’id de SMS a supprimer');
             return;
-            }
-            for (let i in which) {
-                this.sms.splice(i,1);
-            }
+        }
+        for (let i in which) {
+            this.sms.splice(i, 1);
+        }
     }
 
     /*
         Vole sms
     */
-    public voleSMS = function (victime: Humain){
+    public voleSMS = function (victime: Humain) {
 
         this.sms = this.sms.concat(victime.sms);
-      
-        return this.sms.length();
-    }   
+
+        return this.sms.length;
+    }
 
     /**
-    *
-    */
-    public parler(volumeVoix : boolean = false, interlocuteur: Humain):string {
+     *
+     */
+    public parler(volumeVoix: boolean = false, interlocuteur ? : Humain) {
 
-      let phrase = '';
-      phrase = this.prenom + ' ' + this.nom + " parle " + this.langue + " ";
-      if (volumeVoix) {
-        phrase = phrase + 'très fort ';
-      }
-      if (interlocuteur) {
-        phrase = phrase + 'à ' + interlocuteur.getPrenom() + ' ' + interlocuteur.getNom();
-      }
-      phrase = phrase + ".";
-      return phrase;
+        let phrase = '';
+        phrase = this.prenom + ' ' + this.nom + " parle " + this.langue + " ";
+        if (volumeVoix) {
+            phrase = phrase + 'très fort ';
+        }
+        if (interlocuteur) {
+            phrase = phrase + 'à ' + interlocuteur.getPrenom() + ' ' + interlocuteur.getNom();
+        }
+        phrase = phrase + ".";
+        console.log(phrase);
     }
 
     // Modifier la quantité d'un produit passé en paramètre
-    public modifierQuantiteProduit = function(
-        produit : Produit,
-        quantite : number = null)
-        {
-        if(quantite && produit) {
+    public modifierQuantiteProduit = function (
+        produit: Produit,
+        quantite: number = null) {
+        if (quantite && produit) {
             produit.setQuantite(quantite);
         }
     }
 
     // Modifier le prix d'un produit passé en paramètre
-    public modifierPrixProduit = function(
-        produit : Produit,
-        prix : number = null)
-        {
-        if(prix && produit) {
+    public modifierPrixProduit = function (
+        produit: Produit,
+        prix: number = null) {
+        if (prix && produit) {
             produit.setPrix(prix);
         }
     }
-    
+
     /*
         Ajouter un objet au panier
     */
-    public ajouterAuPanier(produit: Produit){
-        console.log(produit);     
-      this.panier.push(produit);
+    public ajouterAuPanier(produit: Produit, interlocuteur: Humain) {
+        /*        console.log("quantité de", produit.getTitre(), produit.getQuantite());*/
+
+        if (produit.getQuantite() > 0) {
+            /*            console.log(produit);*/
+            this.panier.push(produit);
+            this.ecrireSMS(["Vous avez acheté", produit.getTitre(), "Merci"]);
+            this.parler(false, interlocuteur);
+        } else {
+            this.ecrireSMS(["Désolé, l'article demandé n'est plus disponible"]);
+        }
     }
 
     /*
         Supprimer un objet du panier
     */
-    public supprimerDuPanier(produit: Produit){
-            let where = this.panier.indexOf(produit);
-            this.panier.splice(where,1);    
+    public supprimerDuPanier(produit: Produit) {
+        let where = this.panier.indexOf(produit);
+        this.panier.splice(where, 1);
     }
-    
+
     /*
         Calculer prix total du panier avec taxes
     */
-    public prixTotalPanier(){
+    public prixTotalPanier() {
         let prixPanier = 0;
+        let test = 0;
 
-        for (let produit of this.panier){
-                prixPanier += 
-                produit.quantite*
-                (produit.prix+produit.prix*produit.taxe);           
+        for (let produit of this.panier) {
+            test++;
+            prixPanier +=
+                produit.quantite *
+                (produit.prix + produit.getPrix() * produit.getTaxe());
         }
-            console.log(prixPanier);
+        console.log("prix total panier : ", test);
 
     }
 
     /*
-    * FONCTION STATIQUE
+        Afficher le panier
     */
+    public afficherPanier() {
+        console.log("panier : ", this.panier);
+        let output = '<h2>MON PANIER</h2>';
 
-    public static menacer = function()
-    {   
+        for (let produit of this.panier) {
+            output +=
+                `<div class='jumbotron'>
+                <h1>${produit.titre}</h1>
+                <p>${produit.resume}</p>
+                <button class='btn btn-primary' type='button'>${produit.prix} francs</button>
+                <span class='badge'>${produit.quantite}</span>
+                <hr />
+                <p>Nombre d'accessoires : ${produit.accessoires.length}</p>
+                </div>`;
+        }
+
+
+        return output;
+
+    }
+
+    /*
+        Calculer le nombre d'accessoires totaux du panier
+    */
+    public accessoiresTotauxPanier() {
+        let nbAccessoires = 0;
+
+        for (let produit of this.panier) {
+            nbAccessoires += produit.quantite * produit.accessoires.length;
+        }
+        console.log("nombre d'accessoires", nbAccessoires);
+
+        return nbAccessoires;
+
+    }
+
+    /*
+        Calculer la moyenne des  prix ds produit qu'il y a dans le panier
+    */
+    public moyennePrixPanier() {
+        let moyenne = 0;
+
+        for (let produit of this.panier) {
+            moyenne += produit.prix;
+        }
+        moyenne = moyenne / this.panier.length;
+        console.log("Moyenne du prix des produits du panier : ", moyenne);
+
+        return moyenne;
+
+    }
+
+    /*
+        Modifier la quantiter d'un produit dans le panier
+    */
+    public modifierQuantiteProduitPanier(produit: Produit, quantite: number) {
+        let where = this.panier.indexOf(produit);
+        this.modifierQuantiteProduit(this.panier[where], quantite);
+    }
+
+    /*
+        Récupérer le panier d'un autre Humain
+    */
+    public carottePanier(victime: Humain) {
+        this.panier = this.panier.concat(victime.panier);
+        victime.panier = [];
+    }
+
+    // Ajouter un ou plusieurs commentaires à un produit
+    ajouterCommentaires(produit: Produit, commentaires: Array < string > ) {
+        
+       var commentArray:Array < Object > = null;
+        commentaires.forEach(commentaire => {
+            let id = produit.getCommentaire.length+1;
+            let comment:Object = new Commentaire(id,this, produit, commentaire);
+            console.log("comment",comment); 
+            commentArray.push(new Commentaire(id,this, produit, commentaire));   
+        });
+        console.log("Commentaires à ajouter",commentArray);
+        console.log("voir les commentaires du produit",produit.getCommentaire());
+            //produit.setCommentaire(commentArray);
+        console.log("voir les commentaires du produit",produit.getCommentaire());
+    }
+
+    /*
+     * FONCTION STATIQUE
+     */
+
+    public static menacer = function () {
         alert(Humain.texteADire);
     }
 

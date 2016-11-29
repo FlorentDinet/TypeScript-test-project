@@ -12,6 +12,8 @@ export class Produit {
     private prix: number;
     private taxe: number;
     private couleurs: Array < string > ;
+    private accessoires: Array< string >;
+    private commentaires: Array< Object >;
 
     // Attribut statique
     public static compteur = 0;
@@ -23,7 +25,10 @@ export class Produit {
         quantite = 0,
         prix = 0,
         taxe = 0.20,
-        couleurs: Array<string> = []
+        couleurs: Array<string> = [],
+        accessoires: Array<string> = [],
+        commentaires: Array< Object > = []
+
     ) {
         this.id = Produit.compteur,
         this.titre = titre;
@@ -32,8 +37,15 @@ export class Produit {
         this.prix = prix;
         this.taxe = taxe;
         this.couleurs = couleurs;
-
+        this.accessoires = accessoires;
+        this.commentaires = commentaires;
+        
         Produit.compteur++;
+    }
+
+    // Get titre
+    getTitre(){
+        return this.titre;
     }
 
     // Set quantite
@@ -42,9 +54,44 @@ export class Produit {
         this.quantite = quantite;
     }
 
+    // Get quantite
+    getQuantite(){
+        return this.quantite;
+    }
+
+    // Get taxe
+    getTaxe(){
+        return this.taxe;
+    }
+
+    // Get prix
+    getPrix(){
+        return this.prix;
+    }
+
     // Set prix
     setPrix(prix:number){
         this.prix = prix;
+    }
+
+    // Set accessoires
+    setAccessoires(accessoires:Array <string>){
+        this.accessoires = accessoires;
+    }
+
+    // Get commentaires
+    getCommentaire(){
+        return this.commentaires;
+    }
+
+    // Set commentaires
+    setCommentaire(commentaires:Array < Object >){
+        this.commentaires = this.commentaires.concat(commentaires);
+    }
+
+    // compter le nb de commentaires à un produit
+    compterCommentaires(){
+        console.log(this.commentaires.length);
     }
 
     public fastShow = function () {

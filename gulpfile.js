@@ -26,7 +26,7 @@ gulp.task('browser-sync', function() {
         port: 8066,
         server: {
             baseDir: "./dist", //base
-            index: "index.html" //fichier a chargé
+            index: "index.html" //fichier a charger
         }
     });
 });
