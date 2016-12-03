@@ -1,5 +1,9 @@
-import { Commentaire } from './Commentaire';
-import { Produit } from './Produit';
+import {
+    Commentaire
+} from './Commentaire';
+import {
+    Produit
+} from './Produit';
 /**
  * name
  */
@@ -16,6 +20,7 @@ export class Humain {
     private niveauLangue: number;
     private sms: Array < string > ;
     private panier: Array < Object > = [];
+    private commentaires: Array < Object > ;
 
     // Attributs statiques
     private static compteur = 0;
@@ -34,7 +39,8 @@ export class Humain {
         poids: string = '65kg',
         langue: string = 'Français',
         niveauLangue = 1,
-        sms: Array < string > = []
+        sms: Array < string > = [],
+        commentaires: Array < Object > = []
     ) {
         this.prenom = prenom;
         this.nom = nom;
@@ -45,6 +51,7 @@ export class Humain {
         this.langue = langue;
         this.niveauLangue = niveauLangue;
         this.sms = sms;
+        this.commentaires = commentaires;
 
         Humain.compteur++;
     }
@@ -134,6 +141,14 @@ export class Humain {
     */
     getPanier() {
         console.log(this.panier);
+    }
+
+    public get $commentaires(): Array < Object > {
+        return this.commentaires;
+    }
+
+    public set $commentaires(value: Array < Object > ) {
+        this.commentaires = value;
     }
 
     /*
@@ -262,8 +277,8 @@ export class Humain {
         for (let produit of this.panier) {
             test++;
             prixPanier +=
-                produit.quantite *
-                (produit.prix + produit.getPrix() * produit.getTaxe());
+                produit.getQuantite() *
+                (produit.getPrix() + produit.getPrix() * produit.getTaxe());
         }
         console.log("prix total panier : ", test);
 
@@ -311,6 +326,7 @@ export class Humain {
     /*
         Calculer la moyenne des  prix ds produit qu'il y a dans le panier
     */
+
     public moyennePrixPanier() {
         let moyenne = 0;
 
@@ -321,7 +337,6 @@ export class Humain {
         console.log("Moyenne du prix des produits du panier : ", moyenne);
 
         return moyenne;
-
     }
 
     /*
@@ -341,19 +356,45 @@ export class Humain {
     }
 
     // Ajouter un ou plusieurs commentaires à un produit
-    ajouterCommentaires(produit: Produit, commentaires: Array < string > ) {
-        
-       var commentArray:Array < Object > = null;
+    // Constructeur
+
+    public ecrireCommentaire(param: {
+        commentaire: Commentaire,
+        produit: Produit,
+        texte: string
+    }) {
+        param.commentaire.$writer = this.prenom + "" + this.nom;
+        param.commentaire.$id = Commentaire.compteur;
+        param.commentaire.$produit = param.produit.getTitre();
+        param.commentaire.$content = param.texte;
+
+        this.commentaires.push(param.commentaire);
+        param.produit.$commentaires.push(param.commentaire);
+        return this;
+    }
+
+    public ecrireCommentaires(commentaires: Array < any > ) {
         commentaires.forEach(commentaire => {
-            let id = produit.getCommentaire.length+1;
-            let comment:Object = new Commentaire(id,this, produit, commentaire);
-            console.log("comment",comment); 
-            commentArray.push(new Commentaire(id,this, produit, commentaire));   
+            this.ecrireCommentaire(commentaire);
         });
-        console.log("Commentaires à ajouter",commentArray);
-        console.log("voir les commentaires du produit",produit.getCommentaire());
-            //produit.setCommentaire(commentArray);
-        console.log("voir les commentaires du produit",produit.getCommentaire());
+        return this;
+    }
+
+    public supprimerCommentaire(which: Array < string >= null) {
+        if (typeof which !== 'Array') // S'il ne s'agit pas d'un tableau.
+        {
+            alert('On attend un tableau d’id de SMS a supprimer');
+            return;
+        }
+        for (let i=0; i < this.commentaires.length ; i ++) {
+            this.commentaires.splice(i, 1);
+        }
+    }
+
+    // voir le titre du produit concerné par rapport à un commentaire
+
+    public voirTitreProduit(id:number) {
+        return this.$commentaires[id].produit;
     }
 
     /*

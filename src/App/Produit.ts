@@ -79,15 +79,15 @@ export class Produit {
         this.accessoires = accessoires;
     }
 
-    // Get commentaires
-    getCommentaire(){
-        return this.commentaires;
-    }
 
-    // Set commentaires
-    setCommentaire(commentaires:Array < Object >){
-        this.commentaires = this.commentaires.concat(commentaires);
-    }
+	public get $commentaires(): Array< Object > {
+		return this.commentaires;
+	}
+
+	public set $commentaires(value: Array< Object >) {
+		this.commentaires = value;
+	}
+
 
     // compter le nb de commentaires à un produit
     compterCommentaires(){
